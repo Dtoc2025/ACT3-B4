@@ -1,0 +1,85 @@
+<div class="carrito-container">
+  <div class="carrito-header">
+    <div class="carrito-title">
+      <div>
+        <h2>Carrito</h2>
+        <p class="hint">
+          <ng-container *ngIf="cantidadTotal$ | async as total">
+            <span *ngIf="total === 0">Sin productos</span>
+            <span *ngIf="total === 1">1 producto</span>
+            <span *ngIf="total > 1">{{ total }} productos</span>
+          </ng-container>
+        </p>
+      </div>
+    </div>
+
+    <button
+      *ngIf="((cantidadTotal$ | async) ?? 0) > 0"
+      class="btn-vaciar"
+      (click)="vaciar()"
+      title="Vaciar carrito">
+      Vaciar
+    </button>
+  </div>
+
+  <ng-container *ngIf="carrito$ | async as carrito">
+    <!-- ESTADO VACÍO -->
+    <div class="empty-state" *ngIf="carrito.length === 0">
+      <div class="empty-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24"
+             fill="none" stroke="currentColor" stroke-width="1.5"
+             stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="9" cy="21" r="1"></circle>
+          <circle cx="20" cy="21" r="1"></circle>
+          <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+        </svg>
+      </div>
+      <p class="empty-title">Tu carrito está vacío</p>
+      <p class="empty-text">Agrega productos del catálogo para comenzar</p>
+    </div>
+
+    <!-- LISTA DE PRODUCTOS -->
+    <div class="items" *ngIf="carrito.length > 0">
+      <div class="item" *ngFor="let p of carrito">
+        <div class="item-image">
+          <img [src]="p.imagen" [alt]="p.nombre" />
+        </div>
+        <div class="item-info">
+          <h4>{{ p.nombre }}</h4>
+          <span class="item-precio">{{ p.precio | currency:'GTQ':'symbol-narrow':'1.2-2' }} c/u</span>
+        </div>
+        <div class="item-controls">
+          <button class="qty-btn" (click)="cambiar(p.id, p.cantidad - 1)" title="Restar">−</button>
+          <span class="qty-value">{{ p.cantidad }}</span>
+          <button class="qty-btn" (click)="cambiar(p.id, p.cantidad + 1)" title="Sumar">+</button>
+        </div>
+        <div class="item-subtotal">
+          {{ p.precio | subtotal: p.cantidad | currency:'GTQ':'symbol-narrow':'1.2-2' }}
+        </div>
+        <button class="btn-eliminar" (click)="eliminar(p.id)" title="Eliminar">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+               fill="none" stroke="currentColor" stroke-width="2.5"
+               stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- RESUMEN / TOTAL -->
+    <div class="resumen" *ngIf="carrito.length > 0">
+      <div class="resumen-row">
+        <span>Artículos</span>
+        <span>{{ cantidadTotal$ | async }}</span>
+      </div>
+      <div class="resumen-row total">
+        <span>Total</span>
+        <span class="total-value">
+          {{ carrito | totalCarrito | currency:'GTQ':'symbol-narrow':'1.2-2' }}
+        </span>
+      </div>
+      <button class="btn-pagar">Proceder al pago</button>
+    </div>
+  </ng-container>
+</div>

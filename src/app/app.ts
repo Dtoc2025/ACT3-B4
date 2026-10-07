@@ -1,11 +1,12 @@
-import { Component, signal } from '@angular/core';
+import { Component } from '@angular/core';
+import { ProductosComponent } from './components/productos/productos.component';
+import { CarritoComponent } from './components/carrito/carrito.component';
 
 @Component({
-  imports: [],
   selector: 'app-root',
-  styleUrl: './app.css',
+  standalone: true,
+  imports: [ProductosComponent, CarritoComponent],
   templateUrl: './app.html',
+  styleUrls: ['./app.css']
 })
-export class App {
-  protected readonly title = signal('carrito-ventas');
-}
+export class App {}

@@ -1,0 +1,143 @@
+:host {
+  display: block;
+  min-height: 100vh;
+  background: #f7f8fa;
+  font-family: 'Inter', 'Segoe UI', Roboto, -apple-system, sans-serif;
+  color: #111827;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* ---------- HEADER ---------- */
+.app-header {
+  background: #ffffff;
+  border-bottom: 1px solid #e5e7eb;
+  padding: 1rem 2rem;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-content {
+  max-width: 1300px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.logo-mark {
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  background: #0f766e;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.5px;
+}
+
+.logo h1 {
+  margin: 0;
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+  color: #111827;
+}
+
+.subtitle {
+  margin: 0;
+  font-size: 0.78rem;
+  color: #6b7280;
+  font-weight: 400;
+}
+
+.header-nav {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: #6b7280;
+  font-size: 0.88rem;
+  font-weight: 500;
+  padding: 0.35rem 0;
+  border-bottom: 2px solid transparent;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.nav-link:hover {
+  color: #111827;
+}
+
+.nav-link.active {
+  color: #0f766e;
+  border-bottom-color: #0f766e;
+}
+
+/* ---------- MAIN ---------- */
+.app-main {
+  flex: 1;
+  max-width: 1300px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 2rem;
+  display: grid;
+  grid-template-columns: 1.7fr 1fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.section-productos,
+.section-carrito {
+  min-width: 0;
+}
+
+.section-carrito {
+  position: sticky;
+  top: 100px;
+}
+
+/* ---------- FOOTER ---------- */
+.app-footer {
+  text-align: center;
+  padding: 1.5rem;
+  color: #9ca3af;
+  font-size: 0.8rem;
+  border-top: 1px solid #e5e7eb;
+  background: #ffffff;
+}
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 960px) {
+  .app-main {
+    grid-template-columns: 1fr;
+    padding: 1rem;
+  }
+  .section-carrito {
+    position: static;
+  }
+  .header-nav { display: none; }
+  .logo h1 { font-size: 1rem; }
+  .subtitle { display: none; }
+}
+
+@media (max-width: 600px) {
+  .app-header { padding: 0.85rem 1rem; }
+  .app-main { padding: 0.75rem; gap: 1rem; }
+}

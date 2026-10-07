@@ -1,0 +1,24 @@
+<div class="productos-container">
+  <div class="productos-header">
+    <div>
+      <h2>Catálogo</h2>
+      <p class="hint">Selecciona los productos que deseas agregar al carrito</p>
+    </div>
+    <span class="count-badge">{{ productos.length }} disponibles</span>
+  </div>
+
+  <div class="grid">
+    <article class="card" *ngFor="let p of productos">
+      <div class="card-image">
+        <img [src]="p.imagen" [alt]="p.nombre" loading="lazy" />
+      </div>
+      <div class="card-body">
+        <h3>{{ p.nombre }}</h3>
+        <p class="precio">{{ p.precio | currency:'GTQ':'symbol-narrow':'1.2-2' }}</p>
+      </div>
+      <button class="btn-agregar" (click)="agregar(p)">
+        Agregar al carrito
+      </button>
+    </article>
+  </div>
+</div>
